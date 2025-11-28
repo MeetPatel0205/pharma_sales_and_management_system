@@ -1,0 +1,81 @@
+﻿@model pharma_sales_and_management_system.Models.UserDetail
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+@{
+    Layout = "_UserLayout";
+}
+
+<div class="container">
+    @if (ViewBag.successmessage != null)
+    {
+        <div class="alert alert-success">
+            @ViewBag.successmessage
+        </div>
+    }
+<h4>User Profile</h4>
+<hr />
+<div class="card card-primary col-md-6">
+    <form asp-action="Edit" enctype="multipart/form-data">
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group" style="position:relative">
+                @* <label class="control-label" for="ProfilePic">ProfilePic</label> *@
+                    <img src="@Html.DisplayFor(modelItem => Model.ProfilePic)" style="border-radius: 50%;margin-left:40%" height="150px" width="150px">
+                <i class="fas fa-edit" id="editIcon" style="bottom:5px;position:absolute;cursor: pointer;"></i>
+                <input type="file" name="file" class="form-control" id="ProfilePic" style="display: none;">
+                <input type="hidden" name="oldfile" class="form-control" id="OldProfilePic" value="@Model.ProfilePic">
+                <span class="text-danger field-validation-valid" data-valmsg-for="ProfilePic" data-valmsg-replace="true"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContactNo" class="control-label"></label>
+                <input asp-for="ContactNo" class="form-control" />
+                <span asp-validation-for="ContactNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pincode" class="control-label"></label>
+                <input asp-for="Pincode" class="form-control" />
+                <span asp-validation-for="Pincode" class="text-danger"></span>
+            </div>
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+            <input type="submit" value="Edit Profile" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        // JavaScript to trigger file input click event when the edit icon is clicked
+        document.getElementById('editIcon').addEventListener('click', function () {
+            document.getElementById('ProfilePic').click();
+        });
+    </script>
+}

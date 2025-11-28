@@ -1,0 +1,53 @@
+﻿@model (int pid, string Product, string description, int Price, string Disease, string Company, string image, DateTime ExpDate, string Category, int mid)
+
+@{
+    ViewData["Title"] = "DetailProduct";
+}
+
+@{
+    Layout = "_UserLayout";
+}
+
+<div class="container mt-5">
+    <h1 class="display-4">@Html.DisplayFor(model => model.Product)</h1>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <img src="@Html.DisplayFor(model => model.image)" class="img-fluid rounded" alt="Product Image">
+        </div>
+        <div class="col-md-6">
+            <dl class="row">
+                @*<dt class="col-sm-4">Product</dt>
+                <dd class="col-sm-8"><h4>@Html.DisplayFor(model => model.Product)</h4></dd>*@
+
+                <dt class="col-sm-4"></dt>
+                <dd class="col-sm-8"><h4>&#8377;@Html.DisplayFor(model => model.Price)</h4></dd>
+
+                <dt class="col-sm-4">Description</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.description)</dd>
+
+                <dt class="col-sm-4">Disease</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Disease)</dd>
+
+                <dt class="col-sm-4">Expire Date</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.ExpDate)</dd>
+
+                <dt class="col-sm-4">Category</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Category)</dd>
+
+                <dt class="col-sm-4">Company</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Company)</dd>
+            </dl>
+
+            <div class="row">
+            <form asp-action="addCart" asp-controller="User">
+                <input type="hidden" name="mid" value="@Model.mid">
+                <input type="hidden" name="pid" value="@Model.pid">
+                <button type="submit" class="btn btn-primary">Add To Cart</button>
+            </form>
+            <a asp-action="Index" class="btn btn-secondary ml-2">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

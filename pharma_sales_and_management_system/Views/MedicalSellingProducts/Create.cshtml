@@ -1,0 +1,69 @@
+﻿@model pharma_sales_and_management_system.Models.MedicalSellingProduct
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@{
+    Layout = "_MedicalLayout";
+}
+
+<div class="container">
+@if (TempData["repeatDataError"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["repeatDataError"]
+    </div>
+}
+<h4>MedicalSellingProduct</h4>
+
+<div class="card card-primary">
+    <form asp-action="Create">
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Product Name</label>
+                <select name="pname" id="productName" asp-items="@ViewBag.ProductName" class="form-control" required>
+                    <option value="">-- Select the Medicine --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                @*<label asp-for="actualPrice" class="control-label"></label>*@
+                <lable> Actual Price :-  </lable>
+                <input type="text" id="actualmrp" class="form-control" readonly />
+                @*<span asp-validation-for="Mrp" class="text-danger"></span>*@
+            </div>         
+            <div class="form-group">
+                @*<label asp-for="Mrp" class="control-label"></label>*@
+                <lable> Selling Price :-  </lable>
+                <input asp-for="Mrp" id="mrp" class="form-control" />
+                <span asp-validation-for="Mrp" class="text-danger"></span>
+            </div>
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+            <input type="submit" value="Add" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            $("#productName").on("change", function () {
+                var productName = $("#productName").val();
+                $.ajax({
+                    url: "/MedicalSellingProducts/getPrice",
+                    method: "post",
+                    data: { productName: productName },
+                    success: function (data) {
+                        $("#actualmrp").val(data);
+                    }
+                })
+            })
+        })
+    </script>
+}

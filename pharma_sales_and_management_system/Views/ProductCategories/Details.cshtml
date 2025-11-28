@@ -1,0 +1,26 @@
+﻿@model pharma_sales_and_management_system.Models.ProductCategory
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+@{
+    Layout = "_AgencyLayout";
+}
+
+<div class="container">
+    <h4>ProductCategory</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CategoryName)
+        </dd>
+    </dl>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+</div>

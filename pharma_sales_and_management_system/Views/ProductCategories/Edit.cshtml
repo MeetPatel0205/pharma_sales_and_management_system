@@ -1,0 +1,36 @@
+﻿@model pharma_sales_and_management_system.Models.ProductCategory
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+@{
+    Layout = "_AgencyLayout";
+}
+
+<div class="container">
+<h4>ProductCategory</h4>
+<hr />
+<div class="card card-primary">
+    <form asp-action="Edit">
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="CategoryName" class="control-label"></label>
+                <input asp-for="CategoryName" class="form-control" />
+                <span asp-validation-for="CategoryName" class="text-danger"></span>
+            </div>
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+            <input type="submit" value="Edit" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

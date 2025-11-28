@@ -1,0 +1,61 @@
+﻿@model IEnumerable<pharma_sales_and_management_system.Models.AgencyDetail>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@{
+    Layout = "_AgencyLayout";
+}
+
+<div class="container">
+<h1 style="margin-left:10%;">Agency Details</h1>
+
+<a asp-action="Logout" class="btn btn-info">Logout</a>
+
+<div class="card">
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Agency Name</th>
+                    <th>Email</th>
+                    <th>Contact No</th>
+                    <th>Password</th>
+                    <th>Profile Image</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.AgencyName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ContactNo)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Password)</td>
+                        <td><img src="@Html.DisplayFor(modelItem => item.ProfileImage)" height="50px" width="50px"></td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#example1").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        });
+    });
+</script>

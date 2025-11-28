@@ -1,0 +1,63 @@
+﻿@model IEnumerable<pharma_sales_and_management_system.Models.MedicalShopProductStock>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@{
+    Layout = "_MedicalLayout";
+}
+
+<div class="container">
+    <h1 style="margin-left:10%;">Medicine Stock</h1>
+
+    <div class="card">
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @*@Html.DisplayNameFor(model => model.MedicalShop.OwnerName)*@
+                            Id
+                        </th>
+                        <th>
+                            @*@Html.DisplayNameFor(model => model.Product.ProductName)*@
+                            Product
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TotalQuantity)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product.ProductName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TotalQuantity)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#example1").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        });
+    });
+</script>
